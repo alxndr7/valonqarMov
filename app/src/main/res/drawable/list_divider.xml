@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Creamos la forma que tendrá el degradado, en este caso un retangulo -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="5dp"
+    android:insetRight="5dp" >
+
+    <shape>
+        <gradient
+            android:angle="0"
+            android:centerColor="#6c91ba"
+            android:endColor="#c9d7e6"
+            android:height="2dp"
+            android:startColor="#c9d7e6" />
+
+        <size android:height="3dp" />
+    </shape>
+
+</inset>

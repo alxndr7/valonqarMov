@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#263238</color>
+    <color name="colorPrimaryDark">#80CBC4</color>
+    <color name="colorAccent">#FF4081</color>009688
+    <color name="fondoboton">#607D8B</color>
+    <!--<color name="fondoboton">#2E7D32</color>-->
+    <color name="fondoBlanco">#FFFFFF</color>
+    <color name="fondoBotonesBotton">#263238</color>
+    <color name="fondolayout">#ECEFF1</color>
+
+    <color name="event_color_01">#59dbe0</color>
+    <color name="event_color_02">#f57f68</color>
+    <color name="event_color_03">#87d288</color>
+    <color name="event_color_04">#f8b552</color>
+    <color name="toolbar">#efefef</color>
+    <color name="toolbar_text">#8f000000</color>
+    <color name="accent">#2789e4</color>
+
+    <color name="color_cancha1">#9C27B0</color>
+    <color name="color_cancha2">#009688</color>
+    <color name="color_cancha3">#CDDC39</color>
+    <color name="color_cancha4">#ABC</color>
+    <color name="color_cancha5">#FF9800</color>
+    <color name="cancha_default">#AAFFAA</color>
+
+</resources>

@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="pe.separala.com.separalape2.AboutCanchaActivity"
+    tools:showIn="@layout/activity_about_cancha">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/fondolayout">
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal" >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10">
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:layout_marginRight="1dp"
+                        android:background="@color/fondoBotonesBotton"
+                        android:drawableTop="@drawable/cellphoneiphone"
+                        android:textColor="#FFFFFF"
+                        android:id="@+id/ButtonTest"
+                        android:text="Llamar"/>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/fondoBotonesBotton"
+                        android:drawableTop="@drawable/calendarcheck2"
+                        android:textColor="#FFFFFF"
+                        android:onClick="verLocation"
+                        android:id="@+id/ButtonTest2"
+                        android:text="Ver Disponibilidad"/>
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_above="@id/llButtons"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:custom="http://schemas.android.com/apk/res-auto">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="2dp"
+                app:cardUseCompatPadding="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            custom:pager_animation="Accordion"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="visible"
+            custom:pager_animation_span="1100"
+            android:layout_height="200dp"/>
+        <com.daimajia.slider.library.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            custom:selected_color="#0095BF"
+            custom:unselected_color="#55333333"
+            custom:selected_drawable="@drawable/donut"
+            custom:shape="oval"
+            custom:selected_padding_left="5dp"
+            custom:selected_padding_right="5dp"
+            custom:unselected_padding_left="5dp"
+            custom:unselected_padding_right="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            custom:selected_width="6dp"
+            custom:selected_height="6dp"
+            custom:unselected_width="6dp"
+            custom:unselected_height="6dp"
+            android:layout_marginBottom="20dp"
+            />
+        <com.daimajia.slider.library.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator2"
+            style="@style/AndroidImageSlider_Corner_Oval_Orange"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true" />
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:weightSum="9">
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="35dp"
+                                android:layout_weight="2"
+                                android:layout_marginTop="-5dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_home"
+                                android:adjustViewBounds="true" />
+                            <TableLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5">
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <TextView
+                                        android:id="@+id/tvNomNeg"
+                                        android:layout_width="0dp"
+                                        android:layout_height="fill_parent"
+                                        android:layout_weight="50"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold"
+                                        android:text=""/>
+
+                                </TableRow>
+
+                                <TableRow
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/tvDireccion"
+                                        android:layout_width="0dp"
+                                        android:layout_height="fill_parent"
+                                        android:layout_weight="50"
+                                        android:textSize="12sp"
+                                        android:text="Av. Mariscal Castilla 300"/>
+
+                                </TableRow>
+
+                            </TableLayout>
+
+                            <com.github.ivbaranov.mfb.MaterialFavoriteButton
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginTop="-15dp"
+                                android:layout_gravity="top"
+                                app:mfb_color="black"
+                                app:mfb_type="heart"
+                                app:mfb_size="55"/>
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardUseCompatPadding="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:weightSum="9">
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="3"
+                                android:layout_marginRight="1dp"
+                                android:background="@color/fondoboton"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/avtimer"
+                                android:adjustViewBounds="true" />
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="3"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@color/fondoboton"
+                                android:src="@drawable/phoneclassic"
+                                android:adjustViewBounds="true" />
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="3"
+                                android:layout_marginLeft="1dp"
+                                android:background="@color/fondoboton"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/creditcard"
+                                android:adjustViewBounds="true" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:weightSum="9">
+
+                            <TextView
+                                android:id="@+id/tvHorario"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="3"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center_horizontal"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:text="11 am - 10 pm"/>
+
+                            <TextView
+                                android:id="@+id/tvTelefono"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="3"
+                                android:gravity="center_horizontal"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:text=""/>
+
+                            <TextView
+                                android:id="@+id/tvPrecios"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="3"
+                                android:gravity="center_horizontal"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:text=""/>
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardUseCompatPadding="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:weightSum="9">
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="3"
+                                android:layout_marginRight="1dp"
+                                android:background="@color/fondoboton"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/car"
+                                android:adjustViewBounds="true" />
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="3"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@color/fondoboton"
+                                android:src="@drawable/food"
+                                android:adjustViewBounds="true" />
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="3"
+                                android:layout_marginLeft="1dp"
+                                android:background="@color/fondoboton"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/calendarcheck"
+                                android:adjustViewBounds="true" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/fondoboton"
+                            android:weightSum="9">
+
+                            <TextView
+                                android:id="@+id/tvCochera"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="3"
+                                android:layout_marginBottom="3dp"
+                                android:layout_marginRight="1dp"
+                                android:background="@color/fondoBlanco"
+                                android:gravity="center_horizontal"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:text="SI"/>
+
+                            <TextView
+                                android:id="@+id/tvComida"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="3"
+                                android:gravity="center_horizontal"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_marginBottom="3dp"
+                                android:background="@color/fondoBlanco"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:text="SI"/>
+
+                            <TextView
+                                android:id="@+id/tvCalendario"
+                                android:layout_width="0dp"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="3"
+                                android:gravity="center_horizontal"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="3dp"
+                                android:background="@color/fondoBlanco"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:text="NO"/>
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblNumCanchas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Canchas Disponibles"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TableRow
+                            android:id="@+id/trCancha0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:weightSum="6">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="center"
+                                android:background="@color/fondoboton"
+                                android:textColor="@color/fondoBlanco"
+                                android:text="Descripción"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="center"
+                                android:text="Dimensión"
+                                android:background="@color/fondoboton"
+                                android:textColor="@color/fondoBlanco"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="center"
+                                android:text="# Jug"
+                                android:textColor="@color/fondoBlanco"
+                                android:background="@color/fondoboton"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="center"
+                                android:background="@color/fondoboton"
+                                android:textColor="@color/fondoBlanco"
+                                android:text="Color"
+                                />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:id="@+id/trCancha1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma A"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 15m x 40m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="10 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha1"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trCancha2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trCancha3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:id="@+id/trCancha4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+
+
+                        <TableRow
+                            android:id="@+id/trCancha5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+                    </TableLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblEmv31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Ubicación"/>
+
+                    <TextView
+                        android:id="@+id/lblEmv32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="14sp"
+                        android:text="Calle pierola 234"/>
+
+
+                    <fragment
+                        xmlns:map="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/fmap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="250dp"
+                        map:cameraZoom="13"
+                        map:mapType="normal"
+                        map:liteMode="true"
+                        class="com.google.android.gms.maps.SupportMapFragment" />
+
+                </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

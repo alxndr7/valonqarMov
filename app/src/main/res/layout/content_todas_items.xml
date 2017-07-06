@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/llButtons"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="9"
+            >
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_marginRight="1dp"
+                android:background="@color/fondoBotonesBotton"
+                android:drawableTop="@drawable/cellphoneiphone"
+                android:textColor="#FFFFFF"
+                android:id="@+id/ButtonTest"
+                android:text="Llamar"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@color/fondoBotonesBotton"
+                android:drawableTop="@drawable/verenmapa"
+                android:textColor="#FFFFFF"
+                android:onClick="listarCanchasMaps"
+                android:id="@+id/ButtonTest3"
+                android:text="Ver en Mapa"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_marginLeft="1dp"
+                android:background="@color/fondoBotonesBotton"
+                android:drawableTop="@drawable/calendarcheck2"
+                android:textColor="#FFFFFF"
+                android:onClick="verCalendario"
+                android:id="@+id/ButtonTest2"
+                android:text="Ver Disponibilidad"/>
+
+        </TableRow>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_above="@id/llButtons"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="@drawable/list_divider">
+    </ListView>
+
+</RelativeLayout>
+
+<!--
+<ListView android:id="@+id/list"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+</ListView>
+
+-->
