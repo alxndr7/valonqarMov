@@ -46,7 +46,7 @@
                 android:background="@color/fondoBotonesBotton"
                 android:drawableTop="@drawable/calendarcheck2"
                 android:textColor="#FFFFFF"
-                android:onClick="verCalendario"
+                android:onClick="verPermisos"
                 android:id="@+id/ButtonTest2"
                 android:text="Ver Disponibilidad"/>
 

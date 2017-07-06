@@ -1,5 +1,6 @@
 package pe.separala.com.separalape2;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,16 +57,17 @@ import pe.separala.com.separalape2.model.NegocioDBHelper;
 import pe.separala.com.separalape2.utils.InternetConnection;
 import pe.separala.com.separalape2.utils.SessionManager;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
 import static android.content.ContentValues.TAG;
 import static pe.separala.com.separalape2.Constantes.OBTENER_CANCHAS;
 
-public class ListarCanchasActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ListarCanchasActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ListView list;
     GridAdapterComensales adapter;
-    public  ListarCanchasActivity CustomListView = null;
+    public ListarCanchasActivity CustomListView = null;
     public boolean flagComensales;
     private DAONegocio[] jsonComensales;
     private ProgressDialog pDialog;
@@ -74,7 +76,6 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
     private NegocioDBHelper mDbHelper;
     Context mContext;
     SessionManager session;
-    ImageView avatarUsuario;
     TextView nomUsu;
     private DrawerLayout drawer;
     private static final int PERMISSION_REQUEST_CODE = 200;
@@ -87,11 +88,8 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mContext = getApplicationContext();
-        String ciudad="nn";
-        if(checkPermission())
-            ciudad = getCity();
 
-        Log.i("PERMISOS", "CIUDAD : " + ciudad);
+
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -119,15 +117,6 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
                 Intent explicit_intent = new Intent(ListarCanchasActivity.this, AboutCanchaActivity.class);
                 explicit_intent.putExtra("Cancha",cancha);
                 ListarCanchasActivity.this.startActivity(explicit_intent);
-                //Log.d(TAG, "Selected Note: " + selActa.getFch_inspeccion());
-                //Instanciamos el DialogForNote
-                //DialogForNote newAddNote = new DialogForNote();
-
-                //Seteamos la nota que deseamos actualizar
-                //newAddNote.setmNoteForUpd(selNote);
-
-                //Mostramos el DialogForNote asignadole el tag "addnote"
-                //newAddNote.show(getSupportFragmentManager(), "addnote");
 
             }
         });
@@ -156,20 +145,13 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         getSupportActionBar().setHomeButtonEnabled(true);
 
         View hView =  navigationView.getHeaderView(0);
-/*        avatarUsuario = (ImageView) hView.findViewById(R.id.imageUsuario);
-        String url = "https://graph.facebook.com/" + user.get(SessionManager.ID_USUARIO) + "/picture?type=small";
-        Glide.with(this).load(url).into(avatarUsuario);
-*/
+
         ProfilePictureView profilePicture = (ProfilePictureView) hView.findViewById(R.id.friendProfilePicture);
         profilePicture.setProfileId(user.get(SessionManager.ID_USUARIO));
         nomUsu = (TextView) hView.findViewById(R.id.txtvNombreUsuario);
         nomUsu.setText("Hola " + user.get(SessionManager.KEY_NAME));
 
         toggle.syncState();
-
-
-
-        //String url = "https://graph.facebook.com/" + user.get(SessionManager.ID_USUARIO) + "/picture?type=small";
 
         if (InternetConnection.checkConnection(mContext)) {
             new ListarCanchasActivity.GetComensales().execute();
@@ -179,14 +161,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
             adapter=new GridAdapterComensales(CustomListView, allNegocios);
             list.setAdapter(adapter);
         }
-
-        /*
-        String url = "http://blog.on.com/wp-content/uploads/2014/01/profile-pic.jpg";
-        Log.i("URLIMAGE1", url);
-
-        Log.i("URLIMAGE2", url);
-        Glide.with(this).load(url).into(avatarUsuario);
-        Log.i("URLIMAGE3", url);*/
+        requestPermission();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -213,21 +188,25 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
                 if (grantResults.length > 0) {
 
                     boolean locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-                    if (locationAccepted){
-
-                    }
+                    if (locationAccepted && cameraAccepted)
+                        Toast.makeText(getApplicationContext(),
+                                "Permission Granted, Now you can access location data and camera.", Toast.LENGTH_LONG)
+                                .show();
                     else {
-
+                        Toast.makeText(getApplicationContext(),
+                                "Permission Denied, You cannot access location data and camera.", Toast.LENGTH_LONG)
+                                .show();
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
-                                showMessageOKCancel("Los permisos son requeridos",
+                                showMessageOKCancel("You need to allow access to both the permissions",
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
                                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION},
+                                                    requestPermissions(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION},
                                                             PERMISSION_REQUEST_CODE);
                                                 }
                                             }
@@ -266,25 +245,6 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
                 });
     }
 
-    public static Bitmap getFacebookProfilePicture(String userID){
-        Bitmap bitmap = null;
-        try
-        {
-        URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=small");
-            Log.i("BITMAPIMAGE1", imageURL.toString());
-        bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
-            Log.i("BITMAPIMAGE2", imageURL.toString());
-
-        }
-         catch(IOException ie) {
-            ie.printStackTrace();
-             Log.i("BITMAPIMAGE3",ie.toString());
-        }
-
-        return bitmap;
-    }
-
-
     public void listarCanchasMaps(android.view.View view) {
         //Log.d("MAIN", "LISTAR CATEGORIA");
 
@@ -293,35 +253,34 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         //finish();
     }
 
-    public String getCity(){
+    public void verPermisos(android.view.View view) {
 
-        String ciudad = "";
+        String ciudad = "nn";
+        Log.i("PERMISOS", "permisos: " + checkPermission());
 
         if(checkPermission()) {
 
             //TO get the location,manifest file is added with 2 permissions
             //Location Manager is used to figure out which location provider needs to be used.
             LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
             //Best location provider is decided by the criteria
             Criteria criteria = new Criteria();
             //location manager will take the best location from the criteria
             locationManager.getBestProvider(criteria, true);
 
-            //nce  you  know  the  name  of  the  LocationProvider,  you  can  call getLastKnownPosition() to  find  out  where  you  were  recently.
             Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
 
             Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
-            Log.d("Tag", "1");
+
             List<Address> addresses;
 
             try {
-                addresses = gcd.getFromLocation(-15.490419, -70.129484, 1);
+                addresses = gcd.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 if (addresses.size() > 0)
 
                 {
                     //while(locTextView.getText().toString()=="Location") {
-                    ciudad = addresses.get(0).getLocality().toString();
+                    Log.i("cityname", "ciudad: " + addresses.get(0).getLocality().toString());
                     // }
                 }
 
@@ -329,18 +288,24 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
                 e.printStackTrace();
 
             }
-        }
 
-        return ciudad;
+            Log.i("PERMISOS", "CIUDAD : " + ciudad);
+        }
     }
+
+
 
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
-        return result == PackageManager.PERMISSION_GRANTED ;
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
+
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+
+        //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_CODE);
     }
 
 

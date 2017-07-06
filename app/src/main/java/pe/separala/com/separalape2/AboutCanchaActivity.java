@@ -207,7 +207,7 @@ public class AboutCanchaActivity extends AppCompatActivity implements BaseSlider
     }
 
     public void verCalendario(android.view.View view) {
-        //Log.d("MAIN", "LISTAR CATEGORIA");
+        Log.i("VERCALENDARIO", "LISTAR CATEGORIA");
 
         new AboutCanchaActivity.getEventos().execute();
         //finish();
@@ -245,6 +245,7 @@ public class AboutCanchaActivity extends AppCompatActivity implements BaseSlider
             HttpHandler sh = new HttpHandler();
             // Making a request to url and getting response
             String url = OBTENER_UBICACION_CANCHA + '/' + idCancha ;
+            Log.e(TAG, "url: " + url);
             String jsonStr = sh.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
