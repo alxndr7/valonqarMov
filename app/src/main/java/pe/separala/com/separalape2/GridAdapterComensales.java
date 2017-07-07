@@ -61,7 +61,7 @@ public class GridAdapterComensales extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            view = inflater.inflate(R.layout.item_cancha, null, false);
+            view = inflater.inflate(R.layout.item_cancha, viewGroup, false);
 
         }
         item = getItem(position);

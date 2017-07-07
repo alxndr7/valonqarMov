@@ -77,7 +77,7 @@
         <ImageView
             android:id="@+id/imgCancha"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin" />
@@ -98,28 +98,96 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?colorPrimary" />
 
-        <RatingBar
-            android:id="@+id/rating"
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style= "@style/CustomRatingBar"
             android:layout_gravity="center_horizontal"
-            android:numStars="5"
-            android:stepSize="0.01"
-            android:isIndicator="true"/>
+            android:weightSum="6">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:layout_marginRight="1dp"
+                android:background="@color/fondoboton"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/car"
+                android:adjustViewBounds="true" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/fondoboton"
+                android:src="@drawable/food"
+                android:adjustViewBounds="true" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@color/fondoboton"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/calendarcheck"
+                android:adjustViewBounds="true" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:layout_marginRight="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="@color/fondoboton"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/avtimer"
+                android:adjustViewBounds="true" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/fondoboton"
+                android:src="@drawable/phoneclassic"
+                android:adjustViewBounds="true" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+                android:background="@color/fondoboton"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/creditcard"
+                android:adjustViewBounds="true" />
+        </TableRow>
+
+
         <!--
-        <RatingBar
-            android:id="@+id/rating"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:clickable="true"
-            android:isIndicator="true"
-            android:paddingTop="8dp"
-            android:progressTint="#FDDB39"
-            android:rating="3"
-            android:secondaryProgressTint="#FDDB39" /> -->
+                <RatingBar
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style= "@style/CustomRatingBar"
+                    android:layout_gravity="center_horizontal"
+                    android:numStars="5"
+                    android:stepSize="0.01"
+                    android:isIndicator="true"/>
+                -->
+                <RatingBar
+                    android:id="@+id/rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:clickable="true"
+                    android:isIndicator="true"
+                    android:paddingTop="8dp"
+                    android:progressTint="#FDDB39"
+                    android:rating="3"
+                    android:secondaryProgressTint="#FDDB39" />
 
     </LinearLayout>
 

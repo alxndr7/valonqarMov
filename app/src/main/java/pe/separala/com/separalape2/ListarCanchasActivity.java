@@ -27,11 +27,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import in.srain.cube.views.GridViewWithHeaderAndFooter;
 import pe.separala.com.separalape2.model.DAOCancha;
 import pe.separala.com.separalape2.model.DAONegocio;
 import pe.separala.com.separalape2.model.DAOUsuario;
@@ -79,6 +82,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
     TextView nomUsu;
     private DrawerLayout drawer;
     private static final int PERMISSION_REQUEST_CODE = 200;
+    GridViewWithHeaderAndFooter grid;
 
 
     @Override
@@ -88,8 +92,10 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mContext = getApplicationContext();
+        grid = (GridViewWithHeaderAndFooter) findViewById(R.id.gridview);
+        grid.setNumColumns(2);
 
-
+        //grid.setAdapter(new GridAdapter(this, Products.getTelefonos()));
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -108,9 +114,10 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         Log.i("LOGINUSUARIOS", "USUARIOS NUM : " + allUsuarios.size());
 
         CustomListView = this;
-        list=(ListView)findViewById(R.id.list);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //list=(ListView)findViewById(R.id.list);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 DAONegocio cancha =  allNegocios.get(position);
@@ -158,8 +165,10 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         }
         else {
             allNegocios = mDbHelper.getAllNegocios();
-            adapter=new GridAdapterComensales(CustomListView, allNegocios);
-            list.setAdapter(adapter);
+            //adapter=new GridAdapterComensales(CustomListView, allNegocios);
+            //list.setAdapter(adapter);
+            grid.addHeaderView(createHeaderView(2, allNegocios));
+            grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
         }
         requestPermission();
     }
@@ -312,6 +321,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
     private class GetComensales extends AsyncTask<Void, Void, Void> {
         ProgressDialog progressDialog;
 
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -320,8 +330,10 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
             progressDialog.setMessage(getString(R.string.string_title_upload_progressbar_));
             progressDialog.show();
             allNegocios = mDbHelper.getAllNegocios();
-            adapter=new GridAdapterComensales(CustomListView, allNegocios);
-            list.setAdapter(adapter);
+            grid.addHeaderView(createHeaderView(2, allNegocios));
+            grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
+            // /adapter=new GridAdapterComensales(CustomListView, allNegocios);
+            //list.setAdapter(adapter);
 
             Toast.makeText(ListarCanchasActivity.this,"Json Data is downloading" + allNegocios.size(), Toast.LENGTH_LONG).show();
 
@@ -441,8 +453,10 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         protected void onPostExecute(Void result) {
             progressDialog.dismiss();
             if(!flagComensales){
-                adapter=new GridAdapterComensales(CustomListView, allNegocios);
-                list.setAdapter(adapter);
+                //adapter=new GridAdapterComensales(CustomListView, allNegocios);
+                //list.setAdapter(adapter);
+                grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
+
                 Toast.makeText(getApplicationContext(),
                         "Usuario o contraseña incorrecta, intentelo nuevamente!", Toast.LENGTH_LONG)
                         .show();
@@ -450,8 +464,9 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
             else {
                 allNegocios = mDbHelper.getAllNegocios();
                 /**************** Create Custom Adapter *********/
-                adapter=new GridAdapterComensales(CustomListView, allNegocios);
-                list.setAdapter(adapter);
+                //adapter=new GridAdapterComensales(CustomListView, allNegocios);
+                //list.setAdapter(adapter);
+                grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
             }
 
         }
@@ -464,6 +479,30 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
 
     }
 
+    private View createHeaderView(int position, List<DAONegocio> neg) {
 
+        View view;
+        LayoutInflater inflater = this.getLayoutInflater();
+        view = inflater.inflate(R.layout.grid_header, null, false);
+
+        DAONegocio item = neg.get(position);
+
+        // Seteando Imagen
+        ImageView image = (ImageView) view.findViewById(R.id.imgCancha);
+        Glide.with(image.getContext()).load(item.getC_url_img()).into(image);
+
+        // Seteando Nombre
+        TextView name = (TextView) view.findViewById(R.id.nombre);
+        name.setText(item.getC_dir_neg());
+
+        // Seteando Descripción
+        TextView descripcion = (TextView) view.findViewById(R.id.precio);
+        descripcion.setText(item.getC_raz_soc_neg());
+
+        RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating);
+        ratingBar.setRating(5);
+
+        return view;
+    }
 
 }
