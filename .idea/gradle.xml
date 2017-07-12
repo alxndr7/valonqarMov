@@ -9,7 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/CustomCalendar" />
+            <option value="$PROJECT_DIR$/libs/CustomGrid" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

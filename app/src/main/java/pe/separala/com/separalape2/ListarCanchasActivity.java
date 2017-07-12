@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.etsy.android.grid.StaggeredGridView;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
 
@@ -66,7 +68,7 @@ import static android.Manifest.permission.CAMERA;
 import static android.content.ContentValues.TAG;
 import static pe.separala.com.separalape2.Constantes.OBTENER_CANCHAS;
 
-public class ListarCanchasActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ListarCanchasActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,  AbsListView.OnItemClickListener {
 
     ListView list;
     GridAdapterComensales adapter;
@@ -82,7 +84,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
     TextView nomUsu;
     private DrawerLayout drawer;
     private static final int PERMISSION_REQUEST_CODE = 200;
-    GridViewWithHeaderAndFooter grid;
+    private StaggeredGridView mGridView;
 
 
     @Override
@@ -92,20 +94,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mContext = getApplicationContext();
-        grid = (GridViewWithHeaderAndFooter) findViewById(R.id.gridview);
-        grid.setNumColumns(2);
-
-        //grid.setAdapter(new GridAdapter(this, Products.getTelefonos()));
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+        mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
 
         mDbHelper = new NegocioDBHelper(this);
 
@@ -117,7 +106,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
 
         //list=(ListView)findViewById(R.id.list);
 
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridView.setOnItemClickListener(new AbsListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 DAONegocio cancha =  allNegocios.get(position);
@@ -127,6 +116,8 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
 
             }
         });
+
+
 
         // Session class instance
         session = new SessionManager(getApplicationContext());
@@ -159,18 +150,17 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         nomUsu.setText("Hola " + user.get(SessionManager.KEY_NAME));
 
         toggle.syncState();
-
+        Log.i("IDFB2", user.get(SessionManager.ID_USUARIO));
         if (InternetConnection.checkConnection(mContext)) {
             new ListarCanchasActivity.GetComensales().execute();
         }
         else {
             allNegocios = mDbHelper.getAllNegocios();
-            //adapter=new GridAdapterComensales(CustomListView, allNegocios);
+            adapter=new GridAdapterComensales(CustomListView, allNegocios);
             //list.setAdapter(adapter);
-            grid.addHeaderView(createHeaderView(2, allNegocios));
-            grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
         }
         requestPermission();
+        mGridView.setOnItemClickListener(this);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -188,6 +178,12 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+    }
+
 
 
     @Override
@@ -330,8 +326,8 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
             progressDialog.setMessage(getString(R.string.string_title_upload_progressbar_));
             progressDialog.show();
             allNegocios = mDbHelper.getAllNegocios();
-            grid.addHeaderView(createHeaderView(2, allNegocios));
-            grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
+            //grid.addHeaderView(createHeaderView(2, allNegocios));
+            mGridView.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
             // /adapter=new GridAdapterComensales(CustomListView, allNegocios);
             //list.setAdapter(adapter);
 
@@ -455,7 +451,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
             if(!flagComensales){
                 //adapter=new GridAdapterComensales(CustomListView, allNegocios);
                 //list.setAdapter(adapter);
-                grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
+                mGridView.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
 
                 Toast.makeText(getApplicationContext(),
                         "Usuario o contraseña incorrecta, intentelo nuevamente!", Toast.LENGTH_LONG)
@@ -466,7 +462,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
                 /**************** Create Custom Adapter *********/
                 //adapter=new GridAdapterComensales(CustomListView, allNegocios);
                 //list.setAdapter(adapter);
-                grid.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
+                mGridView.setAdapter(new GridAdapterComensales(CustomListView, allNegocios));
             }
 
         }
