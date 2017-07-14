@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.separala.com.separalape2.model.DAONegocio;
+import pe.separala.com.separalape2.model.NegocioDBHelper;
 
 import static android.content.ContentValues.TAG;
 import static pe.separala.com.separalape2.Constantes.OBTENER_CANCHAS_POR_DISTRITO;
@@ -64,6 +65,8 @@ public class MapsTodosActivity extends FragmentActivity implements OnMapReadyCal
     private DAONegocio[] infoCanchas;
     private int c = 0;
     private boolean flagPorDist = false;
+    private List<DAONegocio> allNegocios;
+    private NegocioDBHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class MapsTodosActivity extends FragmentActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mDbHelper = new NegocioDBHelper(this);
 
         if (savedInstanceState == null) {
             needsInit=true;
@@ -118,8 +123,34 @@ public class MapsTodosActivity extends FragmentActivity implements OnMapReadyCal
         mMap = map;
         MapsInitializer.initialize(this);
         //addCustomMarker();
-        map.setOnMarkerClickListener(this);
+        mMap.setOnMarkerClickListener(this);
         map.setOnInfoWindowClickListener(this);
+/*
+        adapter = new ArrayAdapter<String>(MapsTodosActivity.this, android.R.layout.simple_spinner_item, spinnerArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sItems.setAdapter(adapter);*/
+        allNegocios = mDbHelper.getAllNegocios();
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+        for(int i=0;i<allNegocios.size();i++){
+            LatLng point = new LatLng(allNegocios.get(i).getN_lat_neg(), allNegocios.get(i).getN_lon_neg());
+            addMarker(mMap, point.latitude, point.longitude,allNegocios.get(i).getC_raz_soc_neg(), R.string.practice_x3);
+            builder.include(point);
+
+        }
+
+        //mMap.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
+        //mMap.setOnInfoWindowClickListener(MapsTodosActivity.this);
+        LatLngBounds bounds = builder.build();
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+        int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
+
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+        mMap.animateCamera(cu);
+
+
         //new MapsTodosActivity.getUbicaciones().execute();
 
         // Let's add a couple of markers*/
@@ -192,13 +223,13 @@ public class MapsTodosActivity extends FragmentActivity implements OnMapReadyCal
     }
 
     private void addMarker(GoogleMap map, double lat, double lon,
-                           int title, int snippet) {
+                           String title, int snippet) {
         Log.i("ADDMARKER" , "constante: " + c);
         Marker m = map.addMarker(new MarkerOptions().position(new LatLng(lat, lon))
-                .title(c + " num")
+                .title(title)
                 .snippet(getString(snippet))
                 .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-        m.setTag(infoCanchas[c++]);
+        m.setTag("Prueba");
     }
 
     /*

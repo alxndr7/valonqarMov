@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -30,8 +31,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -82,6 +85,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
     private DrawerLayout drawer;
     private static final int PERMISSION_REQUEST_CODE = 200;
     private StaggeredGridView mGridView;
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
 
 
     @Override
@@ -93,6 +97,10 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         mContext = getApplicationContext();
         CustomListView = this;
         mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View header = layoutInflater.inflate(R.layout.list_item_header, null);
+        mGridView.addHeaderView(header);
 
         mDbHelper = new NegocioDBHelper(this);
 
@@ -243,9 +251,10 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
 
     public void listarCanchasMaps(android.view.View view) {
         //Log.d("MAIN", "LISTAR CATEGORIA");
-
+        view.startAnimation(buttonClick);
         Intent intent = new Intent(ListarCanchasActivity.this, MapsTodosActivity.class);
         startActivity(intent);
+
         //finish();
     }
 
