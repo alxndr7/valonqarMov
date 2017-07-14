@@ -2,15 +2,20 @@ package pe.separala.com.separalape2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 import java.util.List;
 
@@ -77,6 +82,26 @@ public class GridAdapterComensales extends BaseAdapter {
         // Seteando Descripción
         TextView descripcion = (TextView) view.findViewById(R.id.precio);
         descripcion.setText(item.getC_raz_soc_neg());
+
+        MaterialFavoriteButton fav = (MaterialFavoriteButton) view.findViewById(R.id.fav_list);
+
+        fav.setOnFavoriteChangeListener(
+                new MaterialFavoriteButton.OnFavoriteChangeListener() {
+                    @Override
+                    public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+                        Log.i("FAVORITE", "ESTADO: " + favorite + " ITEM:" + items.get(position).getC_raz_soc_neg());
+                    }
+                });
+/*
+        ImageButton fav = (ImageButton) view.findViewById(R.id.btn_go);
+
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Log.i("FAVORITOS", "click " + items.get(position).getC_raz_soc_neg());
+            }
+        });
+*/
 /*
         Button btn=(Button)view.findViewById(R.id.btnEliminar);
         Button.OnClickListener mOkOnClickListener = new Button.OnClickListener()

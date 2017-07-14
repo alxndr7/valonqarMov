@@ -54,7 +54,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import in.srain.cube.views.GridViewWithHeaderAndFooter;
 import pe.separala.com.separalape2.model.DAOCancha;
 import pe.separala.com.separalape2.model.DAONegocio;
 import pe.separala.com.separalape2.model.DAOUsuario;
@@ -64,13 +63,11 @@ import pe.separala.com.separalape2.utils.SessionManager;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.CAMERA;
 import static android.content.ContentValues.TAG;
 import static pe.separala.com.separalape2.Constantes.OBTENER_CANCHAS;
 
-public class ListarCanchasActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,  AbsListView.OnItemClickListener {
+public class ListarCanchasActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    ListView list;
     GridAdapterComensales adapter;
     public ListarCanchasActivity CustomListView = null;
     public boolean flagComensales;
@@ -94,6 +91,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mContext = getApplicationContext();
+        CustomListView = this;
         mGridView = (StaggeredGridView) findViewById(R.id.grid_view);
 
         mDbHelper = new NegocioDBHelper(this);
@@ -102,22 +100,9 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
 
         Log.i("LOGINUSUARIOS", "USUARIOS NUM : " + allUsuarios.size());
 
-        CustomListView = this;
+
 
         //list=(ListView)findViewById(R.id.list);
-
-        mGridView.setOnItemClickListener(new AbsListView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DAONegocio cancha =  allNegocios.get(position);
-                Intent explicit_intent = new Intent(ListarCanchasActivity.this, AboutCanchaActivity.class);
-                explicit_intent.putExtra("Cancha",cancha);
-                ListarCanchasActivity.this.startActivity(explicit_intent);
-
-            }
-        });
-
-
 
         // Session class instance
         session = new SessionManager(getApplicationContext());
@@ -159,8 +144,20 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
             adapter=new GridAdapterComensales(CustomListView, allNegocios);
             //list.setAdapter(adapter);
         }
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i("ITEMCLICK", "LLEGO POSITION:" + position);
+
+                DAONegocio cancha =  allNegocios.get(position);
+                Intent explicit_intent = new Intent(ListarCanchasActivity.this, AboutCanchaActivity.class);
+                explicit_intent.putExtra("Cancha",cancha);
+                ListarCanchasActivity.this.startActivity(explicit_intent);
+            }
+        });
         requestPermission();
-        mGridView.setOnItemClickListener(this);
+
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -178,12 +175,6 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
-    }
-
 
 
     @Override
@@ -467,11 +458,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
 
         }
 
-           /* super.onPostExecute(result);
-            ListAdapter adapter = new SimpleAdapter(Login.this, contactList,
-                    R.layout.list_item, new String[]{ "email","mobile"},
-                    new int[]{R.id.email, R.id.mobile});
-            lv.setAdapter(adapter);*/
+
 
     }
 
