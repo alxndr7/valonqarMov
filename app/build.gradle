@@ -30,6 +30,7 @@ dependencies {
     })
     compile project(':libs:CustomCalendar')
     compile project(':libs:CustomGrid')
+    compile project(':libs:CustomSlide')
     compile 'com.android.support:design:25.2.0'
     compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'com.android.support:cardview-v7:23.2.0'

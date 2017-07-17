@@ -1,1 +1,1 @@
-include ':app',':libs:CustomCalendar',':libs:CustomGrid'
+include ':app',':libs:CustomCalendar',':libs:CustomGrid',':libs:CustomSlide'

@@ -252,7 +252,7 @@ public class ListarCanchasActivity extends AppCompatActivity implements Navigati
     public void listarCanchasMaps(android.view.View view) {
         //Log.d("MAIN", "LISTAR CATEGORIA");
         view.startAnimation(buttonClick);
-        Intent intent = new Intent(ListarCanchasActivity.this, MapsTodosActivity.class);
+        Intent intent = new Intent(ListarCanchasActivity.this, MapsActivity.class);
         startActivity(intent);
 
         //finish();

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/libs/CustomCalendar/CustomCalendar.iml" filepath="$PROJECT_DIR$/libs/CustomCalendar/CustomCalendar.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/CustomGrid/CustomGrid.iml" filepath="$PROJECT_DIR$/libs/CustomGrid/CustomGrid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs/CustomSlide/CustomSlide.iml" filepath="$PROJECT_DIR$/libs/CustomSlide/CustomSlide.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/libs.iml" filepath="$PROJECT_DIR$/libs/libs.iml" />
       <module fileurl="file://$PROJECT_DIR$/valonqarMov.iml" filepath="$PROJECT_DIR$/valonqarMov.iml" />

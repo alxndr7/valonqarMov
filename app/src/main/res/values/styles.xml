@@ -30,4 +30,9 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:displayOptions">homeAsUp</item>
+    </style>
+
+
 </resources>
