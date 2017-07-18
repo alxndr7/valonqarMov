@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -92,28 +93,71 @@
         </fragment>
     </FrameLayout>
 
+
+
     <!-- SLIDING LAYOUT -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="@color/fondolayout"
         android:orientation="vertical"
         android:clickable="true"
         android:focusable="false"
         android:id="@+id/dragView">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_height="3dp"
+            android:background="@color/colorPrimary" />
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_gravity="center_horizontal"
-            android:weightSum="3">
-            <TextView
-                android:id="@+id/nom_neg"
+            android:weightSum="2">
+
+            <TableLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:gravity="center_vertical|center"
-                android:paddingLeft="10dp"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/nom_neg"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical|center"
+                        android:paddingLeft="10dp"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   >
+
+                    <TextView
+                        android:id="@+id/dir_neg"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textSize="10dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:gravity="center_vertical|center"
+                        android:text=""
+                        android:paddingLeft="10dp"/>
+
+                </TableRow>
+
+            </TableLayout>
+
             <ImageView
                 android:id="@+id/img_neg"
                 android:layout_width="0dp"
@@ -126,6 +170,536 @@
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"/>
             </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_height="3dp"
+            android:background="@color/colorPrimary" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblNumCanchas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="Canchas Disponibles"/>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp">
+
+                        <TableRow
+                            android:id="@+id/trCancha0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:weightSum="6">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="center"
+                                android:background="@color/fondoboton"
+                                android:textColor="@color/fondoBlanco"
+                                android:text="Descripción"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="center"
+                                android:text="Dimensión"
+                                android:background="@color/fondoboton"
+                                android:textColor="@color/fondoBlanco"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="center"
+                                android:text="# Jug"
+                                android:textColor="@color/fondoBlanco"
+                                android:background="@color/fondoboton"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="center"
+                                android:background="@color/fondoboton"
+                                android:textColor="@color/fondoBlanco"
+                                android:text="Color"
+                                />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:id="@+id/trCancha1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma A"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 15m x 40m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="10 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha1"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trCancha2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/trCancha3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:id="@+id/trCancha4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+
+
+                        <TableRow
+                            android:id="@+id/trCancha5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:visibility="gone"
+                            android:weightSum="6">
+                            <TextView
+                                android:id="@+id/tvDescC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Plataforma B"
+                                android:adjustViewBounds="true" />
+                            <TextView
+                                android:id="@+id/tvDimC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="Dim. 20m x 45m"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvNumJugC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="1dp"
+                                android:gravity="left"
+                                android:text="12 jug"
+                                android:adjustViewBounds="true" />
+
+                            <TextView
+                                android:id="@+id/tvColorC5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginRight="5dp"
+                                android:gravity="left"
+                                android:background="@color/color_cancha2"
+                                android:textColor="@color/fondoBlanco"
+                                android:text=""
+                                />
+                        </TableRow>
+
+                    </TableLayout>
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            app:cardCornerRadius="2dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10">
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="2"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/avtimer"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/tvHorario"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="11 am - 10 pm"/>
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/phoneclassic"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/tvTelefono"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text=""/>
+
+
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:weightSum="10">
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="2"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/food"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/tvHorario"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="11 am - 10 pm"/>
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/calendarcheck"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/tvTelefono"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text=""/>
+
+
+                    </TableRow>
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:weightSum="10">
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="2"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/creditcard"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/tvHorario"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="11 am - 10 pm"/>
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/car"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/tvTelefono"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text=""/>
+
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
         <!--<ScrollView-->
         <!--android:id="@+id/sv"-->
         <!--android:layout_width="match_parent"-->

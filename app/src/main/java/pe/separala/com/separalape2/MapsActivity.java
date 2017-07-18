@@ -2,6 +2,7 @@ package pe.separala.com.separalape2;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import pe.separala.com.separalape2.model.DAOCancha;
 import pe.separala.com.separalape2.model.DAONegocio;
 import pe.separala.com.separalape2.model.NegocioDBHelper;
 
@@ -58,9 +61,10 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
     private Spinner sItems;
     private int idDistTmp = 0;
     private SlidingUpPanelLayout mLayout;
-    private TextView txt_nombre;
+    private TextView txt_nombre,txt_dir;
     private ImageView img_neg;
     private int tmp_cont = 0;
+    private List<DAOCancha> listCanchas;
 
 
     @Override
@@ -74,8 +78,10 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
 
         txt_nombre = (TextView) findViewById(R.id.nom_neg);
         img_neg = (ImageView) findViewById(R.id.img_neg);
+        txt_dir = (TextView) findViewById(R.id.dir_neg);
 
         mDbHelper = new NegocioDBHelper(this);
+        listCanchas = new ArrayList<DAOCancha>();
 
         if (savedInstanceState == null) {
             needsInit=true;
@@ -152,6 +158,44 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
 
         txt_nombre.setText(neg.getC_raz_soc_neg());
         Glide.with(img_neg.getContext()).load(neg.getC_url_img()).into(img_neg);
+        txt_dir.setText(neg.getC_dir_neg());
+
+        listCanchas = mDbHelper.getCanchasByNeg(neg.getN_cod_neg());
+
+        String id_tr="trCancha", id_desc = "tvDescC", id_dim = "tvDimC", id_jug_re = "tvNumJugC", id_color = "tvColorC";
+        int res_id_tr,res_id_desc,res_id_dim,res_id_num, res_id_color;
+        TableRow tr;
+        TextView tvdes,tvdim,tvnumjug,tvcolor;
+        Log.i("NUMCANCHAS", "Tamaño:" + listCanchas.size());
+
+        for (int i = 1; i <= listCanchas.size(); i++) {
+            id_tr="trCancha"; id_desc = "tvDescC"; id_dim = "tvDimC"; id_jug_re = "tvNumJugC"; id_color = "tvColorC";
+            id_tr = id_tr+ i; id_desc =id_desc +i; id_dim = id_dim +i; id_jug_re = id_jug_re +i ; id_color = id_color +i;
+            Log.i("MyActivity", "ON CREATE DESC: " + listCanchas.get(i-1).getC_desc_cancha());
+            Log.i("MyActivity", "ON CREATE IDS: " + id_tr + "/" + id_desc + "/" + id_dim + "/" + id_jug_re + "/" + id_color);
+
+            res_id_tr = getResources().getIdentifier(id_tr, "id" , getPackageName());
+            tr = (TableRow) findViewById(res_id_tr);
+            tr.setVisibility(View.VISIBLE);
+
+            res_id_desc = getResources().getIdentifier(id_desc, "id" , getPackageName());
+            tvdes = (TextView) findViewById(res_id_desc);
+            tvdes.setText(listCanchas.get(i-1).getC_desc_cancha());
+
+            res_id_dim = getResources().getIdentifier(id_dim, "id" , getPackageName());
+            tvdim = (TextView) findViewById(res_id_dim);
+            tvdim.setText(listCanchas.get(i-1).getN_largo_cancha() + "m x " + listCanchas.get(i-1).getN_ancho_cancha() +"m");
+
+            res_id_num = getResources().getIdentifier(id_jug_re, "id" , getPackageName());
+            tvnumjug = (TextView)findViewById(res_id_num);
+            tvnumjug.setText(listCanchas.get(i-1).getN_num_jug_recomen() + "Pers.");
+
+            res_id_color = getResources().getIdentifier(id_color, "id" , getPackageName());
+            tvcolor = (TextView) findViewById(res_id_color);
+            tvcolor.setBackgroundColor(Color.parseColor(listCanchas.get(i-1).getC_color_cancha()));
+
+
+        }
 
         Toast.makeText(this, "Posicion: " + arg0.getId() + " , " +arg0.getTag() , Toast.LENGTH_LONG).show();
 

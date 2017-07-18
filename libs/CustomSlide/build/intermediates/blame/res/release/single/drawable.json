@@ -1,18 +1,10 @@
 [
     {
-        "merged": "E:\\Android Studio\\valonqarMov\\libs\\CustomSlide\\build\\intermediates\\res\\merged\\release\\drawable\\below_shadow.xml",
-        "source": "E:\\Android Studio\\valonqarMov\\libs\\CustomSlide\\src\\main\\res\\drawable\\below_shadow.xml"
+        "merged": "E:\\AndroidStudio\\valonqarMov\\libs\\CustomSlide\\build\\intermediates\\res\\merged\\release\\drawable\\below_shadow.xml",
+        "source": "E:\\AndroidStudio\\valonqarMov\\libs\\CustomSlide\\src\\main\\res\\drawable\\below_shadow.xml"
     },
     {
-        "merged": "E:\\Android Studio\\AndroidSlidingUpPanel-master\\library\\build\\intermediates\\res\\merged\\release\\drawable\\above_shadow.xml",
-        "source": "E:\\Android Studio\\AndroidSlidingUpPanel-master\\library\\src\\main\\res\\drawable\\above_shadow.xml"
-    },
-    {
-        "merged": "E:\\Android Studio\\AndroidSlidingUpPanel-master\\library\\build\\intermediates\\res\\merged\\release\\drawable\\below_shadow.xml",
-        "source": "E:\\Android Studio\\AndroidSlidingUpPanel-master\\library\\src\\main\\res\\drawable\\below_shadow.xml"
-    },
-    {
-        "merged": "E:\\Android Studio\\valonqarMov\\libs\\CustomSlide\\build\\intermediates\\res\\merged\\release\\drawable\\above_shadow.xml",
-        "source": "E:\\Android Studio\\valonqarMov\\libs\\CustomSlide\\src\\main\\res\\drawable\\above_shadow.xml"
+        "merged": "E:\\AndroidStudio\\valonqarMov\\libs\\CustomSlide\\build\\intermediates\\res\\merged\\release\\drawable\\above_shadow.xml",
+        "source": "E:\\AndroidStudio\\valonqarMov\\libs\\CustomSlide\\src\\main\\res\\drawable\\above_shadow.xml"
     }
 ]
