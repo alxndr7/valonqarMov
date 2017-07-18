@@ -61,7 +61,7 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
     private Spinner sItems;
     private int idDistTmp = 0;
     private SlidingUpPanelLayout mLayout;
-    private TextView txt_nombre,txt_dir;
+    private TextView txt_nombre,txt_dir,txt_telefono, txt_horario, txt_precio,flag_comida,flag_cochera,flag_calendario;
     private ImageView img_neg;
     private int tmp_cont = 0;
     private List<DAOCancha> listCanchas;
@@ -79,6 +79,12 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
         txt_nombre = (TextView) findViewById(R.id.nom_neg);
         img_neg = (ImageView) findViewById(R.id.img_neg);
         txt_dir = (TextView) findViewById(R.id.dir_neg);
+        txt_horario = (TextView) findViewById(R.id.txt_horario);
+        txt_telefono = (TextView) findViewById(R.id.txt_telefono);
+        txt_precio = (TextView) findViewById(R.id.txt_precio);
+        flag_calendario = (TextView) findViewById(R.id.flag_calendar);
+        flag_cochera = (TextView) findViewById(R.id.flag_cochera);
+        flag_comida = (TextView) findViewById(R.id.flag_comida);
 
         mDbHelper = new NegocioDBHelper(this);
         listCanchas = new ArrayList<DAOCancha>();
@@ -110,7 +116,7 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
 
 
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        mLayout.setAnchorPoint(0.4f);
+        mLayout.setAnchorPoint(0.3f);
         mLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
         mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
 
@@ -161,12 +167,25 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
         txt_dir.setText(neg.getC_dir_neg());
 
         listCanchas = mDbHelper.getCanchasByNeg(neg.getN_cod_neg());
+        txt_telefono.setText(neg.getC_tel_neg());
+        txt_horario.setText(neg.getT_hora_ini() + " - " + neg.getT_hora_fin());
+        txt_precio.setText(neg.getN_prec_min() + " - " + neg.getN_prec_max() + " soles");
+        flag_cochera.setText((neg.getN_cochera_neg() == 1) ? "SI" : "NO");
+        flag_comida.setText((neg.getN_comida_neg() == 1) ? "SI" : "NO");
 
         String id_tr="trCancha", id_desc = "tvDescC", id_dim = "tvDimC", id_jug_re = "tvNumJugC", id_color = "tvColorC";
         int res_id_tr,res_id_desc,res_id_dim,res_id_num, res_id_color;
         TableRow tr;
         TextView tvdes,tvdim,tvnumjug,tvcolor;
         Log.i("NUMCANCHAS", "Tamaño:" + listCanchas.size());
+
+        for(int i=1;i<=5;i++){
+            id_tr="trCancha";
+            id_tr = id_tr+ i;
+            res_id_tr = getResources().getIdentifier(id_tr, "id" , getPackageName());
+            tr = (TableRow) findViewById(res_id_tr);
+            tr.setVisibility(View.GONE);
+        }
 
         for (int i = 1; i <= listCanchas.size(); i++) {
             id_tr="trCancha"; id_desc = "tvDescC"; id_dim = "tvDimC"; id_jug_re = "tvNumJugC"; id_color = "tvColorC";

@@ -155,7 +155,25 @@
                         android:paddingLeft="10dp"/>
 
                 </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    >
 
+                    <RatingBar
+                        android:id="@+id/rating"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:isIndicator="true"
+                        android:paddingTop="3dp"
+                        android:progressTint="#FDDB39"
+                        android:rating="3"
+                        android:secondaryProgressTint="#FDDB39" />
+
+                </TableRow>
             </TableLayout>
 
             <ImageView
@@ -186,6 +204,198 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            app:cardCornerRadius="2dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:weightSum="4">
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="1"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/avtimer"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/txt_horario"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="11 am - 10 pm"/>
+
+                    </TableRow>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_height="1dp"
+                        android:background="@color/fondoboton" />
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:weightSum="4">
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="1"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/phoneclassic"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/txt_telefono"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="054-232425"/>
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_height="1dp"
+                        android:background="@color/fondoboton" />
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:weightSum="4">
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="1"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/creditcard"
+                            android:adjustViewBounds="true" />
+
+                    <TextView
+                        android:id="@+id/txt_precio"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="3"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center_horizontal"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:text=""/>
+
+                    </TableRow>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_height="1dp"
+                        android:background="@color/fondoboton" />
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:weightSum="6">
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/food"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/flag_comida"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center_horizontal"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="Si"/>
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/car"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/flag_cochera"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="Si"/>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="25dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="1dp"
+                            android:background="@color/fondoboton"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/calendarcheck"
+                            android:adjustViewBounds="true" />
+
+                        <TextView
+                            android:id="@+id/flag_calendar"
+                            android:layout_width="0dp"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:text="Si"/>
+
+
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -209,6 +419,13 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:text="Canchas Disponibles"/>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimary" />
 
                     <TableLayout
                         android:layout_width="match_parent"
@@ -524,178 +741,6 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            app:cardCornerRadius="2dp"
-            app:cardUseCompatPadding="true">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:weightSum="10">
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
-                            android:layout_weight="2"
-                            android:layout_marginRight="1dp"
-                            android:background="@color/fondoboton"
-                            android:layout_gravity="center_horizontal"
-                            android:src="@drawable/avtimer"
-                            android:adjustViewBounds="true" />
-
-                        <TextView
-                            android:id="@+id/tvHorario"
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="3"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:gravity="center_horizontal"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="11 am - 10 pm"/>
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
-                            android:layout_weight="2"
-                            android:layout_marginLeft="1dp"
-                            android:background="@color/fondoboton"
-                            android:layout_gravity="center_horizontal"
-                            android:src="@drawable/phoneclassic"
-                            android:adjustViewBounds="true" />
-
-                        <TextView
-                            android:id="@+id/tvTelefono"
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="3"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text=""/>
-
-
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:weightSum="10">
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
-                            android:layout_weight="2"
-                            android:layout_marginRight="1dp"
-                            android:background="@color/fondoboton"
-                            android:layout_gravity="center_horizontal"
-                            android:src="@drawable/food"
-                            android:adjustViewBounds="true" />
-
-                        <TextView
-                            android:id="@+id/tvHorario"
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="3"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:gravity="center_horizontal"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="11 am - 10 pm"/>
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
-                            android:layout_weight="2"
-                            android:layout_marginLeft="1dp"
-                            android:background="@color/fondoboton"
-                            android:layout_gravity="center_horizontal"
-                            android:src="@drawable/calendarcheck"
-                            android:adjustViewBounds="true" />
-
-                        <TextView
-                            android:id="@+id/tvTelefono"
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="3"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text=""/>
-
-
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:weightSum="10">
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
-                            android:layout_weight="2"
-                            android:layout_marginRight="1dp"
-                            android:background="@color/fondoboton"
-                            android:layout_gravity="center_horizontal"
-                            android:src="@drawable/creditcard"
-                            android:adjustViewBounds="true" />
-
-                        <TextView
-                            android:id="@+id/tvHorario"
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="3"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:gravity="center_horizontal"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="11 am - 10 pm"/>
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="25dp"
-                            android:layout_weight="2"
-                            android:layout_marginLeft="1dp"
-                            android:background="@color/fondoboton"
-                            android:layout_gravity="center_horizontal"
-                            android:src="@drawable/car"
-                            android:adjustViewBounds="true" />
-
-                        <TextView
-                            android:id="@+id/tvTelefono"
-                            android:layout_width="0dp"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="3"
-                            android:gravity="center_horizontal"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text=""/>
-
-
-                    </TableRow>
-
-                </TableLayout>
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
 
         </LinearLayout>
     </ScrollView>

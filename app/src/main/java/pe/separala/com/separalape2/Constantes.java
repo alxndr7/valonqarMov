@@ -30,9 +30,10 @@ public class Constantes {
     /**l
      * Direcci�n IP de genymotion o AVD
      */
-    private static final String IP = "192.168.0.4";
+    //private static final String IP = "192.168.0.4";
     //private static final String IP = "169.254.187.11";
-    //private static final String IP = "192.168.137.1";
+    //
+    private static final String IP = "192.168.137.1";
     private static final String DOMINIO = "/valonqar/public/index.php/";
     /**
      * URLs del Web Service
