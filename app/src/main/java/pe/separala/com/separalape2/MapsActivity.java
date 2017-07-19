@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,13 +41,21 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import pe.separala.com.separalape2.model.DAOCancha;
+import pe.separala.com.separalape2.model.DAOEventos;
 import pe.separala.com.separalape2.model.DAONegocio;
 import pe.separala.com.separalape2.model.NegocioDBHelper;
+
+import static android.content.ContentValues.TAG;
+import static pe.separala.com.separalape2.Constantes.OBTENER_EVENTOS_POR_CANCHA;
 
 public class MapsActivity extends ActionBarActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
 
@@ -65,7 +74,9 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
     private ImageView img_neg;
     private int tmp_cont = 0;
     private List<DAOCancha> listCanchas;
-
+    private DAOEventos[] jsonEventos;
+    private int idNegocio;
+    private boolean flagEventos = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +173,7 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
     public boolean onMarkerClick(Marker arg0) {
        DAONegocio neg = allNegocios.get(Integer.parseInt(arg0.getTag().toString()));
 
+        idNegocio = neg.getN_cod_neg();
         txt_nombre.setText(neg.getC_raz_soc_neg());
         Glide.with(img_neg.getContext()).load(neg.getC_url_img()).into(img_neg);
         txt_dir.setText(neg.getC_dir_neg());
@@ -247,6 +259,13 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
 
     }
 
+    public void verCalendario(android.view.View view) {
+        Log.i("VERCALENDARIO", "LISTAR CATEGORIA");
+
+        new MapsActivity.getEventos().execute();
+        //finish();
+    }
+
     public void canchasPorDistrito(View view) {
         //Log.d("MAIN", "LISTAR CATEGORIA");
 
@@ -259,27 +278,8 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
 
         if (mLayoutTab.getVisibility() == View.GONE) {
             mLayoutTab.setVisibility(View.VISIBLE);
-            /*
-            mLayoutTab.animate()
-                    .translationY(mLayoutTab.getHeight()).alpha(1.0f)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                            super.onAnimationStart(animation);
-                            mLayoutTab.setVisibility(View.VISIBLE);
-                            mLayoutTab.setAlpha(0.0f);
-                        }
-                    });*/
         } else {
-          /*  mLayoutTab.animate()
-                    .translationY(mLayoutTab.getHeight()).alpha(1.0f)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            mLayoutTab.setVisibility(View.GONE);
-                        }
-                    });*/
+
             mLayoutTab.setVisibility(View.GONE);
         }
     }
@@ -298,5 +298,111 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
                 m.setTag(tmp_cont++);
     }
+
+
+    private class getEventos extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(MapsActivity.this,"Json Data is downloading", Toast.LENGTH_LONG).show();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            HttpHandler sh = new HttpHandler();
+            // Making a request to url and getting response
+            String url = OBTENER_EVENTOS_POR_CANCHA + "/" + idNegocio;
+            String jsonStr = sh.makeServiceCall(url);
+
+            Log.e(TAG, "Response from url: " + jsonStr);
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    JSONArray JsonCom = jsonObj.getJSONArray("eventos");
+
+                    if(JsonCom.length() != 0){
+                        jsonEventos = new DAOEventos[JsonCom.length()];
+                        for (int i = 0; i < JsonCom.length(); i++) {
+                            JSONObject c = JsonCom.getJSONObject(i);
+                            jsonEventos[i] = new DAOEventos(
+                                    c.getInt("id"),
+                                    c.getInt("n_cod_neg"),
+                                    c.getInt("n_cod_cancha"),
+                                    c.getString("title"),
+                                    c.getString("start"),
+                                    c.getString("end"),
+                                    c.getString("color"),
+                                    c.getString("icon")
+                            );
+
+                        }
+
+                        flagEventos = true;
+                    }
+
+                    else
+                        flagEventos = false;
+
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            if(!flagEventos){
+                Toast.makeText(getApplicationContext(),
+                        "No se encontraron eventos para esta semana!", Toast.LENGTH_LONG)
+                        .show();
+
+                Intent explicit_intent = new Intent(MapsActivity.this, CalendarioActivity.class);
+                explicit_intent.putExtra("flagEventos",0);
+                explicit_intent.putExtra("id_neg", idNegocio);
+                MapsActivity.this.startActivity(explicit_intent);
+            }
+            else {
+                /**************** Create Custom Adapter *********/
+                Intent explicit_intent = new Intent(MapsActivity.this, CalendarioActivity.class);
+                explicit_intent.putExtra("flagEventos",1);
+                explicit_intent.putExtra("Eventos", jsonEventos);
+                explicit_intent.putExtra("length", jsonEventos.length);
+                explicit_intent.putExtra("id_neg", idNegocio);
+                MapsActivity.this.startActivity(explicit_intent);
+            }
+
+        }
+
+    }
+
 
 }
