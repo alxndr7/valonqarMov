@@ -57,7 +57,7 @@ import pe.separala.com.separalape2.model.NegocioDBHelper;
 import static android.content.ContentValues.TAG;
 import static pe.separala.com.separalape2.Constantes.OBTENER_EVENTOS_POR_CANCHA;
 
-public class MapsActivity extends ActionBarActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
+public class MapsActivity extends ActionBarActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     private static final String TAG = "DemoActivity";
     private GoogleMap mMap;
@@ -129,7 +129,7 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         mLayout.setAnchorPoint(0.3f);
         mLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
 
         mLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
@@ -170,7 +170,16 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
     }
 
     @Override
+    public void onMapClick(LatLng arg0) {
+        // TODO Auto-generated method stub
+        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
+        Log.d("arg0", arg0.latitude + "-" + arg0.longitude);
+    }
+
+    @Override
     public boolean onMarkerClick(Marker arg0) {
+
+        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
        DAONegocio neg = allNegocios.get(Integer.parseInt(arg0.getTag().toString()));
 
         idNegocio = neg.getN_cod_neg();
@@ -237,6 +246,7 @@ public class MapsActivity extends ActionBarActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap map) {
         mMap = map;
         MapsInitializer.initialize(this);
+        mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
         allNegocios = mDbHelper.getAllNegocios();
 
